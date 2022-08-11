@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
         {
             userId: DataTypes.INTEGER,
             productId: DataTypes.INTEGER,
-            amount: DataTypes.INTEGER,
+            amount: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    min: 0,
+                },
+            },
             orderStatus: DataTypes.STRING,
         },
         {

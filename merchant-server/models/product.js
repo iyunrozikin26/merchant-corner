@@ -14,10 +14,40 @@ module.exports = (sequelize, DataTypes) => {
     }
     Product.init(
         {
-            name: DataTypes.STRING,
-            price: DataTypes.INTEGER,
-            stock: DataTypes.INTEGER,
-            description: DataTypes.STRING,
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "name is require" },
+                },
+            },
+            price: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "price is require" },
+                    min: 0,
+                },
+            },
+            stock: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "stock is require" },
+                    min: 0,
+                },
+            },
+            description: {
+                type: DataTypes.TEXT,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "description is require" },
+                },
+            },
         },
         {
             sequelize,

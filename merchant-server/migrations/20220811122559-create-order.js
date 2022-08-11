@@ -27,9 +27,6 @@ module.exports = {
             amount: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
-                validate: {
-                    min: 0,
-                },
             },
             orderStatus: {
                 allowNull: false,
