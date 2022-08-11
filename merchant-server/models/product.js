@@ -48,6 +48,14 @@ module.exports = (sequelize, DataTypes) => {
                     notNull: { message: "description is require" },
                 },
             },
+            productImg: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "productImg is require" },
+                },
+            },
         },
         {
             sequelize,

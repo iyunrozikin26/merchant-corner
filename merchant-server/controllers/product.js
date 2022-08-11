@@ -1,3 +1,92 @@
-class Controller {}
+const { Product } = require("../models");
+
+class Controller {
+    static async createNewProduct(req, res, next) {
+        const { name, price, stock, description, productImg } = req.body;
+        try {
+            if (!productImg) next({ name: "imageProduct", message: "input image product, please!" });
+
+            const addProduct = await Product.create({
+                name,
+                price: +price,
+                stock: +stock,
+                description,
+                productImg,
+            });
+
+            res.status(201).json({
+                status: "success to add new product",
+                data: addProduct,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async readProducts(req, res, next) {
+        try {
+            const allProducts = await Product.findAll();
+            res.status(200).json({ status: "success to get all products", data: allProducts });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async selectedProduct(req, res, next) {
+        const { productId } = req.params;
+        try {
+            const selected = await Product.findByPk(productId);
+            if (selected) {
+                res.status(200).json({
+                    status: "selected product",
+                    data: selected,
+                });
+            } else {
+                next({ name: "notFoundProduct", message: "Product is Nothing Found" });
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async updateProduct(req, res, next) {
+        const { productId } = req.params;
+        const { name, price, stock, description, productImg } = req.body;
+        try {
+            const selected = await Product.findByPk(productId);
+            if (!selected) {
+                next({ name: "notFoundProduct", message: "Product is Nothing Found" });
+            } else {
+                const updated = await Product.update(
+                    {
+                        name,
+                        price,
+                        stock,
+                        description,
+                        productImg,
+                    },
+                    { where: { id: productId }, returning: true }
+                );
+                res.status(200).json({ status: "success to update product", data: updated[1] });
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async deleteProduct(req, res, next) {
+        const { productId } = req.params;
+        try {
+            const deleted = await Product.destroy({ where: { id: productId } });
+            if (!deleted) {
+                next({ name: "notFoundProduct", message: "Product is Nothing Found" });
+            } else {
+                res.status(200).json({ status: `success to delete product with id ${productId}` });
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
+}
 
 module.exports = Controller;
