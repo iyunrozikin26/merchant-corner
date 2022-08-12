@@ -19,8 +19,12 @@ module.exports = (err, req, res, next) => {
         errorStatus = 401;
     }
 
-    // selected not found by Id
+    // not found product
     if (err.name === "notFoundProduct") {
+        errorStatus = 404;
+    }
+    // not found user
+    if (err.name === "notFoundUser") {
         errorStatus = 404;
     }
 
@@ -31,6 +35,10 @@ module.exports = (err, req, res, next) => {
     // not enought money || not enought stock
     if (err.name === "notEnoughMoney" || err.name === "notEnoughStock") {
         errorStatus = 402;
+    }
+    // allowed admin
+    if (err.name === "adminAccess") {
+        errorStatus = 403;
     }
 
     res.status(errorStatus).json({ message: errorMessage });

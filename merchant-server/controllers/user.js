@@ -54,6 +54,52 @@ class Controller {
             next(error);
         }
     }
+
+    static async selectedUser(req, res, next) {
+        const userId = req.user.id;
+        try {
+            const user = await User.findByPk(userId);
+            res.status(200).json({ status: true, data: user });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async allUsers(req, res, next) {
+        try {
+            let option = {
+                // include: ["Order"],
+                attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+                order: [["createdAt", "DESC"]],
+            };
+            const users = await User.findAll(option);
+            res.status(200).json({ status: true, data: users });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async updateUser(req, res, next) {
+        const userId = req.user.id;
+        try {
+            const updated = await User.update(req.body, { where: { id: userId }, returning: true });
+            res.status(200).json({ status: `user with id ${userId} updated`, data: updated[1][0] });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async deleteUser(req, res, next) {
+        const { userId } = req.params;
+
+        try {
+            const deleted = await User.destroy({ where: { id: userId } });
+            if (!deleted) next({ name: "notFoundUser", message: "user is nothing found" });
+            res.status(200).json({ status: `user with id ${userId} success to delete` });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = Controller;

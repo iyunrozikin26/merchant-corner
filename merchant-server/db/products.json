@@ -1,0 +1,42 @@
+[
+    {
+        "name": "product 4",
+        "price": 25000,
+        "stock": 10,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "productImg": "https://s3.bukalapak.com/img/8340828366/large/League_Original_Legas_Series_Attacanti_LA_Sepatu_Futsal_Pria.jpg",
+        "size": "40",
+        "color": "white",
+        "categoryId": 5
+    },
+    {
+        "name": "product 3",
+        "price": 10000,
+        "stock": 10,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "productImg": "https://s3.bukalapak.com/img/8340828366/large/League_Original_Legas_Series_Attacanti_LA_Sepatu_Futsal_Pria.jpg",
+        "size": "40",
+        "color": "black",
+        "categoryId": 1
+    },
+    {
+        "name": "product 2",
+        "price": 9000,
+        "stock": 12,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "productImg": "https://s3.bukalapak.com/img/8340828366/large/League_Original_Legas_Series_Attacanti_LA_Sepatu_Futsal_Pria.jpg",
+        "size": "42",
+        "color": "blue",
+        "categoryId": 2
+    },
+    {
+        "name": "product 1",
+        "price": 20000,
+        "stock": 3,
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "productImg": "https://s3.bukalapak.com/img/8340828366/large/League_Original_Legas_Series_Attacanti_LA_Sepatu_Futsal_Pria.jpg",
+        "size": "40",
+        "color": "white",
+        "categoryId": 1
+    }
+]

@@ -14,6 +14,7 @@ const authentication = async (req, res, next) => {
             req.user = {
                 id: user.id,
                 email: payload.email,
+                role: user.role,
             };
             next();
         }
@@ -22,6 +23,17 @@ const authentication = async (req, res, next) => {
     }
 };
 
+const authorizeAdmin = async (req, res, next) => {
+    try {
+        console.log(req.user);
+        if (req.user.role == "admin") next();
+        else next({ name: "adminAccess", message: "not allow to access this action!" });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     authentication,
+    authorizeAdmin,
 };
