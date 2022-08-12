@@ -24,5 +24,14 @@ module.exports = (err, req, res, next) => {
         errorStatus = 404;
     }
 
+    // invalid access_token
+    if (err.name === "invalidToken") {
+        errorStatus = 401;
+    }
+    // not enought money || not enought stock
+    if (err.name === "notEnoughMoney" || err.name === "notEnoughStock") {
+        errorStatus = 402;
+    }
+
     res.status(errorStatus).json({ message: errorMessage });
 };

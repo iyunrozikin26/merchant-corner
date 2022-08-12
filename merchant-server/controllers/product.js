@@ -1,8 +1,9 @@
 const { Product } = require("../models");
+const { Op } = require("sequelize");
 
 class Controller {
     static async createNewProduct(req, res, next) {
-        const { name, price, stock, description, productImg } = req.body;
+        const { name, price, stock, description, productImg, categoryId, size, color } = req.body;
         try {
             if (!productImg) next({ name: "imageProduct", message: "input image product, please!" });
 
@@ -12,6 +13,9 @@ class Controller {
                 stock: +stock,
                 description,
                 productImg,
+                categoryId,
+                size,
+                color,
             });
 
             res.status(201).json({
@@ -25,7 +29,15 @@ class Controller {
 
     static async readProducts(req, res, next) {
         try {
-            const allProducts = await Product.findAll();
+            let option = {
+                where: {
+                    stock: { [Op.gt]: 0 },
+                },
+                attributes: { exclude: ["createdAt", "updatedAt"] },
+                order: [["createdAt", "DESC"]],
+            };
+            const allProducts = await Product.findAll(option);
+
             res.status(200).json({ status: "success to get all products", data: allProducts });
         } catch (error) {
             next(error);
@@ -35,7 +47,9 @@ class Controller {
     static async selectedProduct(req, res, next) {
         const { productId } = req.params;
         try {
-            const selected = await Product.findByPk(productId);
+            const selected = await Product.findByPk(productId, {
+                attributes: { exclude: ["createdAt", "updatedAt"] },
+            });
             if (selected) {
                 res.status(200).json({
                     status: "selected product",
@@ -51,7 +65,7 @@ class Controller {
 
     static async updateProduct(req, res, next) {
         const { productId } = req.params;
-        const { name, price, stock, description, productImg } = req.body;
+        const { name, price, stock, description, productImg, size, color } = req.body;
         try {
             const selected = await Product.findByPk(productId);
             if (!selected) {
@@ -64,6 +78,8 @@ class Controller {
                         stock,
                         description,
                         productImg,
+                        size,
+                        color,
                     },
                     { where: { id: productId }, returning: true }
                 );

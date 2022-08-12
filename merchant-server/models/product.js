@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             Product.hasMany(models.Order, { foreignKey: "productId" });
+            Product.belongsTo(models.Category, { foreignKey: "categoryId" });
         }
     }
     Product.init(
@@ -54,6 +55,34 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     notEmpty: { message: "not allowed empty character" },
                     notNull: { message: "productImg is require" },
+                },
+            },
+            size: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "size is require" },
+                },
+            },
+            color: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "color is require" },
+                },
+            },
+            categoryId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: { message: "not allowed empty character" },
+                    notNull: { message: "productImg is require" },
+                },
+                references: {
+                    model: "Categories",
+                    key: "id",
                 },
             },
         },
