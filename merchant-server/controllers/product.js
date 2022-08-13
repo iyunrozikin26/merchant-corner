@@ -1,4 +1,4 @@
-const { Product } = require("../models");
+const { Product, Category } = require("../models");
 const { Op } = require("sequelize");
 
 class Controller {
@@ -33,6 +33,7 @@ class Controller {
                 where: {
                     stock: { [Op.gt]: 0 },
                 },
+                include: ["Category"],
                 attributes: { exclude: ["createdAt", "updatedAt"] },
                 order: [["createdAt", "DESC"]],
             };

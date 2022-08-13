@@ -44,6 +44,7 @@ class Controller {
                     res.status(200).json({
                         status: "success to login",
                         access_token,
+                        email: user.email,
                         role: user.role,
                     });
                 } else {
