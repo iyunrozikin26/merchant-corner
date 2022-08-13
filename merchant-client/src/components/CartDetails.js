@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteCart } from "../store/actions/cartCreator";
 
-const CartDetails = ({ selected }) => {
+const CartDetails = ({ item }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [amount, setAmount] = useState(0);
@@ -36,7 +36,7 @@ const CartDetails = ({ selected }) => {
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                             <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalCenteredScrollableLabel">
-                                {selected.Product.name}
+                                {item.Product.name}
                             </h5>
                             <button
                                 type="button"
@@ -47,14 +47,14 @@ const CartDetails = ({ selected }) => {
                         </div>
                         <div className="modal-body relative p-4">
                             <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">
-                                <img className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg" src={selected.Product.productImg} alt="" />
+                                <img className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg" src={item.Product.productImg} alt="" />
                                 <div className="px-6 py-2 flex flex-col justify-start">
-                                    <h5 className="text-gray-900 text-xl font-medium mb-2">{selected.Product.name}</h5>
-                                    <p className="text-gray-700 text-sm mb-4"> {selected.Product.description}</p>
+                                    <h5 className="text-gray-900 text-xl font-medium mb-2">{item.Product.name}</h5>
+                                    <p className="text-gray-700 text-sm mb-4"> {item.Product.description}</p>
                                     <div className="flex justify-between">
-                                        <p className="text-gray-600 text-xs">available stock: {selected.Product.stock}</p>
+                                        <p className="text-gray-600 text-xs">available stock: {item.Product.stock}</p>
                                         <p className="text-gray-600 text-xs">
-                                            {selected.Product.Category.name} | size: {selected.Product.size}
+                                            {item.Product.Category.name} | size: {item.Product.size}
                                         </p>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@ const CartDetails = ({ selected }) => {
                         </div>
                         <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                             <button
-                                onClick={() => handleRemoveCart(selected.productId)}
+                                onClick={() => handleRemoveCart(item.productId)}
                                 type="button"
                                 className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                                 data-bs-dismiss="modal"
@@ -85,7 +85,7 @@ const CartDetails = ({ selected }) => {
                                 remove from cart
                             </button>
                             <button
-                                onClick={() => handleOrderCustomer(selected.productId)}
+                                onClick={() => handleOrderCustomer(item.productId)}
                                 type="button"
                                 className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                                 data-bs-dismiss="modal"

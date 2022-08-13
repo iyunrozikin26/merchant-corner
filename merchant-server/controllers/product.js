@@ -48,8 +48,10 @@ class Controller {
     static async selectedProduct(req, res, next) {
         const { productId } = req.params;
         try {
-            const selected = await Product.findByPk(productId, {
+            const selected = await Product.findOne({
+                where: { id: productId },
                 attributes: { exclude: ["createdAt", "updatedAt"] },
+                include: ["Category"],
             });
             if (selected) {
                 res.status(200).json({

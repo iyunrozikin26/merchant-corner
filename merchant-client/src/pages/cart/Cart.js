@@ -11,7 +11,6 @@ const CartProduct = () => {
         dispatch(allCarts());
     }, []);
 
-    // console.log(carts);
     return (
         <div className="container mx-auto py-3 px-4 md:px-12 bg-green-100 rounded-full w-full">
             <center className="py-3">
@@ -55,7 +54,7 @@ const CartProduct = () => {
                                         </article>
                                     </button>
                                 </div>
-                                <CartDetails selected={item} />
+                                <CartDetails item={item} />
                             </>
                         );
                     })}

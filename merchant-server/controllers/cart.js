@@ -29,6 +29,19 @@ class Controller {
         }
     }
 
+    static async readProductCart(req, res, next) {
+        const { productId } = req.params;
+        try {
+            const selectedCartItem = await Cart.findOne({
+                where: { productId: req.params.productId },
+            });
+            if (selectedCartItem) next({ name: "notFoundProduct", message: "Product is Nothing Found" });
+            res.status(200).json({ status: true, data: selectedCartItem });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static async addProductToCart(req, res, next) {
         const { productId } = req.params;
         const userId = req.user.id;

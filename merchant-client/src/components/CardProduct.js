@@ -8,11 +8,9 @@ const CardProduct = ({ products }) => {
     const dispatch = useDispatch();
     const { selected } = useSelector((state) => state.productReducer);
 
-    // const handleSelected = (id) => {
-    //     console.log(id);
-    //     dispatch(oneProduct(id));
-    // };
-    console.log(selected);
+    const handleSelected = (id) => {
+        dispatch(oneProduct(id));
+    };
     return (
         <div className="container mx-auto px-4 md:px-12 bg-green-100 rounded-full w-full">
             <span className="text-xl font-semibold">Special for you {">>>>>>>>>>>>>>>"} </span>
@@ -21,7 +19,7 @@ const CardProduct = ({ products }) => {
                     return (
                         <>
                             <div key={idx} className="px-1 w-full md:w-1/3 lg:my-4 lg:px-4 lg:w-1/4">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable" onClick={handleSelected(item.id)}>
+                                <button onClick={() => handleSelected(item.id)} type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
                                     <article className="overflow-hidden rounded-lg shadow-lg">
                                         <img alt="Placeholder" className="block h-44 rounded-lg p-1 w-full" src={item.productImg} />
 
@@ -41,8 +39,18 @@ const CardProduct = ({ products }) => {
                                         </footer>
                                     </article>
                                 </button>
-                                {/* <span>{item.name}</span> */}
-                                {/* <ModalDetails selected={selected} /> */}
+                                <div
+                                    className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+                                    id="exampleModalCenteredScrollable"
+                                    tabindex="-1"
+                                    aria-labelledby="exampleModalCenteredScrollable"
+                                    aria-modal="true"
+                                    role="dialog"
+                                >
+                                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+                                        <ModalDetails item={selected} />
+                                    </div>
+                                </div>
                             </div>
                         </>
                     );
