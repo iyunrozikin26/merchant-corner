@@ -1,17 +1,34 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { order } from "../store/actions/orderCreator";
+import { addCart } from "../store/actions/cartCreator";
 
 const ModalDetails = ({ selected }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [amount, setAmount] = useState(0);
 
-    const handleOrderCustomer = (e) => {
-        e.preventDefault();
-        console.log(amount);
-        console.log("order");
+    const handleOrderCustomer = (id) => {
+        console.log(id);
+        dispatch(order(id, amount))
+            .then((result) => {
+                navigate("/");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
-    const handleCartCustomer = (e) => {
-        e.preventDefault();
-        console.log(amount);
-        console.log("cart");
+
+    const handleCartCustomer = (id) => {
+        console.log(id);
+        dispatch(addCart(id, amount))
+            .then((result) => {
+                navigate("/");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -69,14 +86,14 @@ const ModalDetails = ({ selected }) => {
                         </div>
                         <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                             <button
-                                onClick={handleCartCustomer}
+                                onClick={() => handleCartCustomer(selected.id)}
                                 type="button"
                                 className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                             >
                                 add cart
                             </button>
                             <button
-                                onClick={handleOrderCustomer}
+                                onClick={() => handleOrderCustomer(selected.id)}
                                 type="button"
                                 className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                             >

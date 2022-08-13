@@ -11,7 +11,7 @@ const CartProduct = () => {
         dispatch(allCarts());
     }, []);
 
-    console.log(carts);
+    // console.log(carts);
     return (
         <div className="container mx-auto py-3 px-4 md:px-12 bg-green-100 rounded-full w-full">
             <center className="py-3">
@@ -21,7 +21,9 @@ const CartProduct = () => {
             </center>
             {loading && !error && <span className="flex justify-center items-center text-2xl font-extralight">Loading. . .</span>}
             {!loading && error && <span className="flex justify-center items-center text-2xl font-extralight">{error}</span>}
-            {!loading && !error && (
+            {!loading && !error && carts.data == "you don't have items in cart" ? (
+                <span className="flex justify-center items-center text-2xl font-extralight">{carts.data}</span>
+            ) : (
                 <div className="flex flex-wrap -mx-1 lg:-mx-4 pb-20">
                     {carts?.map((item, idx) => {
                         return (
@@ -53,7 +55,7 @@ const CartProduct = () => {
                                         </article>
                                     </button>
                                 </div>
-                                {/* <CartDetails selected={item} /> */}
+                                <CartDetails selected={item} />
                             </>
                         );
                     })}

@@ -1,8 +1,18 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { oneProduct } from "../store/actions/productCreator";
 
 import ModalDetails from "./ModalDetails";
 
 const CardProduct = ({ products }) => {
+    const dispatch = useDispatch();
+    const { selected } = useSelector((state) => state.productReducer);
+
+    // const handleSelected = (id) => {
+    //     console.log(id);
+    //     dispatch(oneProduct(id));
+    // };
+    console.log(selected);
     return (
         <div className="container mx-auto px-4 md:px-12 bg-green-100 rounded-full w-full">
             <span className="text-xl font-semibold">Special for you {">>>>>>>>>>>>>>>"} </span>
@@ -11,7 +21,7 @@ const CardProduct = ({ products }) => {
                     return (
                         <>
                             <div key={idx} className="px-1 w-full md:w-1/3 lg:my-4 lg:px-4 lg:w-1/4">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable" onClick={handleSelected(item.id)}>
                                     <article className="overflow-hidden rounded-lg shadow-lg">
                                         <img alt="Placeholder" className="block h-44 rounded-lg p-1 w-full" src={item.productImg} />
 
@@ -30,10 +40,9 @@ const CardProduct = ({ products }) => {
                                             </div>
                                         </footer>
                                     </article>
-                                    
                                 </button>
-                                <span>{item.name}</span>
-                                {/* <ModalDetails selected={item} /> */}
+                                {/* <span>{item.name}</span> */}
+                                {/* <ModalDetails selected={selected} /> */}
                             </div>
                         </>
                     );

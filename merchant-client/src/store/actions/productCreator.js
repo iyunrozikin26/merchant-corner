@@ -36,3 +36,19 @@ export const allProducts = () => {
             });
     };
 };
+
+export const oneProduct = (id) => {
+    return (dispatch) => {
+        axios({
+            method: "GET",
+            url: `/products/${id}`,
+        })
+            .then(({ data }) => {
+                // console.log(data);
+                dispatch(setSelectedProduct(data.data));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+};

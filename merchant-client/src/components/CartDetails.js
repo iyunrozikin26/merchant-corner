@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteCart, allCarts } from "../store/actions/cartCreator";
+import { deleteCart } from "../store/actions/cartCreator";
 
 const CartDetails = ({ selected }) => {
     const dispatch = useDispatch();
@@ -15,10 +15,7 @@ const CartDetails = ({ selected }) => {
     const handleRemoveCart = (id) => {
         dispatch(deleteCart(id))
             .then((result) => {
-                dispatch(allCarts());
-                setTimeout(() => {
-                    navigate("/cart");
-                }, 1500);
+                navigate("/cart");
             })
             .catch((err) => {
                 console.log(err);
@@ -83,6 +80,7 @@ const CartDetails = ({ selected }) => {
                                 onClick={() => handleRemoveCart(selected.productId)}
                                 type="button"
                                 className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                                data-bs-dismiss="modal"
                             >
                                 remove from cart
                             </button>
@@ -90,6 +88,7 @@ const CartDetails = ({ selected }) => {
                                 onClick={() => handleOrderCustomer(selected.productId)}
                                 type="button"
                                 className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                                data-bs-dismiss="modal"
                             >
                                 order now
                             </button>

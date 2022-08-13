@@ -24,8 +24,11 @@ export const allCarts = () => {
             headers: { access_token: localStorage.access_token },
         })
             .then(({ data }) => {
-                // console.log(data);
-                dispatch(setCarts(data.data));
+                if (typeof data.data != "string") {
+                    dispatch(setCarts(data.data));
+                } else {
+                    dispatch(setCarts([]));
+                }
             })
             .catch((err) => {
                 dispatch(setError("failed to get all data"));
@@ -53,6 +56,23 @@ export const deleteCart = (id) => {
                 .catch((err) => {
                     reject(err);
                 });
+        });
+    };
+};
+
+export const addCart = (id, amount) => {
+    return (dispatch) => {
+        return new Promise((resolve, reject) => {
+            axios({
+                method: "POST",
+                url: `/carts/${id}`,
+                data: { amount },
+                headers: { access_token: localStorage.access_token },
+            })
+                .then(({ data }) => {
+                    resolve(data);
+                })
+                .catch((err) => reject(err));
         });
     };
 };
