@@ -1,83 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import ModalDetails from "./ModalDetails";
 
-const CardProduct = () => {
+const CardProduct = ({ products }) => {
     return (
         <div className="container mx-auto px-4 md:px-12 bg-green-100 rounded-full w-full">
             <span className="text-xl font-semibold">Special for you {">>>>>>>>>>>>>>>"} </span>
             <div className="flex flex-wrap -mx-1 lg:-mx-4">
-                <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/4">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
-                        <article className="overflow-hidden h-72 rounded-lg shadow-lg">
-                            <img alt="Placeholder" className="block h-44 rounded-lg p-1 w-full" src="https://picsum.photos/600/400/?random" />
+                {products?.map((item, idx) => {
+                    return (
+                        <>
+                            <div key={idx} className="px-1 w-full md:w-1/3 lg:my-4 lg:px-4 lg:w-1/4">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
+                                    <article className="overflow-hidden rounded-lg shadow-lg">
+                                        <img alt="Placeholder" className="block h-44 rounded-lg p-1 w-full" src={item.productImg} />
 
-                            <header className="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 className="text-lg">Article Title</h1>
-                                <p className="text-grey-darker text-sm">11/1/19</p>
-                            </header>
-
-                            <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-                                <div className="flex items-center no-underline  text-black">
-                                    <img alt="Placeholder" className="block rounded-full w-7" src="https://images.tokopedia.net/img/cache/215-square/shops-1/2020/3/5/3052083/3052083_3828d904-1fc4-4b9e-9ba1-fc0e6b3f1fcb.jpg" />
-                                    <p className="ml-2 text-sm">Rp. 99.999,00-</p>
-                                </div>
-                                <div className="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span className="hidden">Like</span>
-                                    <i className="fa fa-heart"></i>
-                                </div>
-                            </footer>
-                        </article>
-                    </button>
-                </div>
-                <ModalDetails />
-                <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/4">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
-                        <article className="overflow-hidden h-72 rounded-lg shadow-lg">
-                            <img alt="Placeholder" className="block h-44 rounded-lg p-1 w-full" src="https://picsum.photos/600/400/?random" />
-
-                            <header className="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 className="text-lg">Article Title</h1>
-                                <p className="text-grey-darker text-sm">11/1/19</p>
-                            </header>
-
-                            <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-                                <div className="flex items-center no-underline  text-black">
-                                    <img alt="Placeholder" className="block rounded-full w-7" src="https://images.tokopedia.net/img/cache/215-square/shops-1/2020/3/5/3052083/3052083_3828d904-1fc4-4b9e-9ba1-fc0e6b3f1fcb.jpg" />
-                                    <p className="ml-2 text-sm">Rp. 99.999,00-</p>
-                                </div>
-                                <div className="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span className="hidden">Like</span>
-                                    <i className="fa fa-heart"></i>
-                                </div>
-                            </footer>
-                        </article>
-                    </button>
-                </div>
-                <ModalDetails />
-                <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/4">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
-                        <article className="overflow-hidden h-72 rounded-lg shadow-lg">
-                            <img alt="Placeholder" className="block h-44 rounded-lg p-1 w-full" src="https://picsum.photos/600/400/?random" />
-
-                            <header className="flex items-center justify-between leading-tight p-2 md:p-4">
-                                <h1 className="text-lg">Article Title</h1>
-                                <p className="text-grey-darker text-sm">11/1/19</p>
-                            </header>
-
-                            <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-                                <div className="flex items-center no-underline  text-black">
-                                    <img alt="Placeholder" className="block rounded-full w-7" src="https://images.tokopedia.net/img/cache/215-square/shops-1/2020/3/5/3052083/3052083_3828d904-1fc4-4b9e-9ba1-fc0e6b3f1fcb.jpg" />
-                                    <p className="ml-2 text-sm">Rp. 99.999,00-</p>
-                                </div>
-                                <div className="no-underline text-grey-darker hover:text-red-dark" href="#">
-                                    <span className="hidden">Like</span>
-                                    <i className="fa fa-heart"></i>
-                                </div>
-                            </footer>
-                        </article>
-                    </button>
-                </div>
-                <ModalDetails />
+                                        <header className="flex items-center justify-between leading-tight p-2 md:p-4">
+                                            <h1 className="text-lg">{item.name}</h1>
+                                            <p className="text-grey-darker text-sm">new brand</p>
+                                        </header>
+                                        <footer className="flex items-center justify-between leading-none p-2 md:p-4">
+                                            <div className="flex items-center no-underline  text-black">
+                                                <img alt="Placeholder" className="block rounded-full w-7" src="https://images.tokopedia.net/img/cache/215-square/shops-1/2020/3/5/3052083/3052083_3828d904-1fc4-4b9e-9ba1-fc0e6b3f1fcb.jpg" />
+                                                <p className="ml-2 text-sm">Rp. {item.price},00-</p>
+                                            </div>
+                                            <div className="no-underline text-grey-darker hover:text-red-dark" href="#">
+                                                <span className="hidden">Like</span>
+                                                <i className="fa fa-heart"></i>
+                                            </div>
+                                        </footer>
+                                    </article>
+                                </button>
+                                <ModalDetails selected={item} />
+                            </div>
+                        </>
+                    );
+                })}
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ModalDetails = ({ selected }) => {
+const CartDetails = ({ selected }) => {
     const [amount, setAmount] = useState(0);
 
     const handleOrderCustomer = (e) => {
@@ -8,7 +8,7 @@ const ModalDetails = ({ selected }) => {
         console.log(amount);
         console.log("order");
     };
-    const handleCartCustomer = (e) => {
+    const handleRemoveCart = (e) => {
         e.preventDefault();
         console.log(amount);
         console.log("cart");
@@ -68,20 +68,20 @@ const ModalDetails = ({ selected }) => {
                             </div>
                         </div>
                         <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                            <button
-                                onClick={handleCartCustomer}
-                                type="button"
+                            <a
+                                onClick={handleRemoveCart}
+                                type="submit"
                                 className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                             >
-                                add cart
-                            </button>
-                            <button
+                                remove from cart
+                            </a>
+                            <a
                                 onClick={handleOrderCustomer}
-                                type="button"
+                                type="submit"
                                 className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                             >
                                 order now
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -90,4 +90,4 @@ const ModalDetails = ({ selected }) => {
     );
 };
 
-export default ModalDetails;
+export default CartDetails;

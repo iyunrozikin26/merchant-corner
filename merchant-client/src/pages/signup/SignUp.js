@@ -1,7 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../store/actions/userCreator";
 
 const SignUp = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [newUser, setNewUser] = useState({
+        username: "",
+        email: "",
+        password: "",
+        phoneNumber: "",
+    });
+
+    const onChangeRegister = (e) => {
+        const { name, value } = e.target;
+        setNewUser({
+            ...newUser,
+            [name]: value,
+        });
+    };
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        dispatch(register(newUser))
+            .then((result) => {
+                if (result.status == "success to register") {
+                    setTimeout(() => {
+                        navigate("/login");
+                        setNewUser({
+                            username: "",
+                            email: "",
+                            password: "",
+                            phoneNumber: "",
+                        });
+                    }, 1500);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <section className="flex justify-center items-center h-screen">
             <div className="w-8/12 px-6 h-full text-gray-800">
@@ -10,7 +50,7 @@ const SignUp = () => {
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="w-full" alt="Sample image" />
                     </div>
                     <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-                        <form>
+                        <form onClick={handleRegister}>
                             <div className="flex flex-row items-center justify-center lg:justify-start">
                                 <p className="text-base mb-0 mr-4">Sign Up with</p>
                                 <button
@@ -66,6 +106,9 @@ const SignUp = () => {
                                     className="form-control block w-full px-4 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="exampleFormControlInput2"
                                     placeholder="Username"
+                                    name="username"
+                                    value={newUser.username}
+                                    onChange={onChangeRegister}
                                 />
                             </div>
                             <div className="mb-6">
@@ -74,6 +117,9 @@ const SignUp = () => {
                                     className="form-control block w-full px-4 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="exampleFormControlInput2"
                                     placeholder="Email address"
+                                    name="email"
+                                    value={newUser.email}
+                                    onChange={onChangeRegister}
                                 />
                             </div>
 
@@ -83,6 +129,9 @@ const SignUp = () => {
                                     className="form-control block w-full px-4 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="exampleFormControlInput2"
                                     placeholder="Phone Number"
+                                    name="phoneNumber"
+                                    value={newUser.phoneNumber}
+                                    onChange={onChangeRegister}
                                 />
                             </div>
 
@@ -92,6 +141,9 @@ const SignUp = () => {
                                     className="form-control block w-full px-4 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="exampleFormControlInput2"
                                     placeholder="Password"
+                                    name="password"
+                                    value={newUser.password}
+                                    onChange={onChangeRegister}
                                 />
                             </div>
 
