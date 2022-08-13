@@ -28,21 +28,17 @@ const Navbar = () => {
                     </svg>
                 </button>
                 <div className="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
-                    <a href="#" className="flex">
+                    <a href="#" className="flex justify-center items-center space-x-3 text-4xl text-blue-900 font-bold">
                         <img className="w-20 rounded-full" src="https://www.thebiggerboat.co.uk/wp-content/uploads/2020/09/Coaches-Corner-Logo-1.jpg" alt="..." />
+                        MCorner
                     </a>
-                    <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
-                        <li className="nav-item p-2">
-                            <a href="#" className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0">
-                                add product
-                            </a>
-                        </li>
+                    {/* <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
                         <li className="nav-item p-2">
                             <a href="#" className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0">
                                 CMS Admin
                             </a>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
                 <div className="flex items-center relative">
                     <div className="flex justify-center pr-3 pt-7">
