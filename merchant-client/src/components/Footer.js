@@ -18,8 +18,8 @@ const Footer = () => {
             </div>
             <div className="text-center italic text-xs">
                 ©2021 Copyright:{" "}
-                <a className="text-white text-xs" href="https://tailwind-elements.com/">
-                    Tailwind Elements
+                <a className="text-white text-xs" href="#">
+                    nasrunrozikin26@gmail.com
                 </a>
             </div>
         </footer>
