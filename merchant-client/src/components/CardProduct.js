@@ -30,8 +30,10 @@ const CardProduct = ({ products }) => {
                                             </div>
                                         </footer>
                                     </article>
+                                    
                                 </button>
-                                <ModalDetails selected={item} />
+                                <span>{item.name}</span>
+                                {/* <ModalDetails selected={item} /> */}
                             </div>
                         </>
                     );

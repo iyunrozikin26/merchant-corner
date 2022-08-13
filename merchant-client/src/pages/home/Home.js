@@ -18,7 +18,7 @@ const Home = () => {
         <div className="w-full flex flex-col items-center">
             <div className="w-full p-3 flex flex-col justify-center items-center">
                 {loading && !error && <span className="flex items-center text-2xl font-extralight">Loading. . .</span>}
-                {!loading && error && <span className="flex items-center text-2xl font-extralight">Loading. . .</span>}
+                {!loading && error && <span className="flex items-center text-2xl font-extralight">{error}</span>}
                 {!loading && !error && (
                     <>
                         <div className="flex w-8/12">

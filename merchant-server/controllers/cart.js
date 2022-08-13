@@ -11,6 +11,7 @@ class Controller {
                     {
                         model: Product,
                         attributes: { exclude: ["createdAt", "updatedAt"] },
+                        include: ["Category"],
                     },
                 ],
                 attributes: { exclude: ["createdAt", "updatedAt"] },
