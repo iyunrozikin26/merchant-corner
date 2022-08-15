@@ -32,23 +32,27 @@ export const allProducts = () => {
             .finally(() => {
                 setTimeout(() => {
                     dispatch(setLoading(false));
-                }, 2000);
+                }, 100);
             });
     };
 };
 
 export const oneProduct = (id) => {
     return (dispatch) => {
-        axios({
-            method: "GET",
-            url: `/products/${id}`,
-        })
-            .then(({ data }) => {
-                // console.log(data);
-                dispatch(setSelectedProduct(data.data));
+        return new Promise((resolve, reject) => {
+            axios({
+                method: "GET",
+                url: `/products/${id}`,
             })
-            .catch((err) => {
-                console.log(err);
-            });
+                .then(({ data }) => {
+                    // console.log(data.data);
+                    // dispatch(setSelectedProduct(data.data));
+                    resolve(data);
+                })
+                .catch((err) => {
+                    // console.log(err);
+                    reject(err);
+                });
+        });
     };
 };

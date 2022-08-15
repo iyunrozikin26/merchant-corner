@@ -27,7 +27,7 @@ const Home = () => {
                         <div className="w-11/12 flex justify-center items-center py-4 ">
                             <ButtonSlider />
                         </div>
-                        <div className="w-11/12 flex justify-center items-center">
+                        <div className="w-full flex justify-center items-center">
                             <CardProduct products={products} />
                         </div>
                     </>

@@ -12,6 +12,7 @@ import CmsUser from "./pages/cms/CmsUser";
 import CmsProduct from "./pages/cms/CmsProduct";
 import ModalDetails from "./components/ModalDetails";
 import Footer from "./components/Footer";
+import Details from "./components/Details";
 
 function App() {
     return (
@@ -19,8 +20,9 @@ function App() {
             {/* {localStorage.access_token && <Navbar />} */}
             <Navbar />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/details" element={<ModalDetails />} />
+                <Route index path="/" element={<Home />} />
+                <Route path="/product" element={<Home />} />
+                <Route path="/product/:id/details" element={<Details />} />
                 <Route path="/cart" element={<CartProduct />} />
                 <Route path="/order" element={<Order />} />
                 <Route path="/admin/cmsUsers" element={<CmsUser />} />
